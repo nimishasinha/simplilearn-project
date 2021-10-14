@@ -11,7 +11,8 @@ public class LockedMe {
         // write your code here
         System.out.println("Welcome to CompanyLocker PVT.Ltd");
         Scanner sc = new Scanner(System.in);
-        String value;
+        String value = null;
+        String label= null;
         do {
             System.out.println("Enter the operation for files");
             System.out.println("Enter 1 for Adding file");
@@ -25,18 +26,23 @@ public class LockedMe {
             } catch (Exception e) {
                 System.out.println("wrong choice entered \n" + e);
             }
+
             switch (choice) {
+
                 case 1: {
                     System.out.println("Enter the name of the file to be added");
                     String fileName = sc.next();
                     File obj = new File(fileName);
+                    if (obj.exists()) {
+                        System.out.println("File already exists");}
+                    else{
                     try {
                         obj.createNewFile();
                         System.out.println("File Created  " + obj.getName());
                     } catch (IOException e) {
                         System.out.println("some error while creating file");
                         e.printStackTrace();
-                    }
+                    }}
                     break;
                 }
                 case 2: {
@@ -90,15 +96,24 @@ public class LockedMe {
                     break;
                 }
 
-                default:
-
+                default: {
                     System.out.println("wrong choice entered");
+                    System.out.println("Enter the operation for files");
+                    System.out.println("Enter 1 for Adding file");
+                    System.out.println("Enter 2 for Deleting File");
+                    System.out.println("Enter 3 for Searching File");
+                    System.out.println("Enter 4 for showing List of files added");
+                    choice = sc.nextInt();
+                   continue ;
+                }
 
 
             }
 
-            System.out.println("Do you want to continue(y/n)");
-            value = sc.next();
+                System.out.println("Do you want to continue(y/n)");
+                value = sc.next();
+
+
         }
         while (value.equals("y"));
         System.out.println("Thank You");
